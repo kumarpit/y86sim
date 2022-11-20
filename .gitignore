@@ -1,2 +1,3 @@
 cpsc313-lab3
-*.out
+*.o
+main

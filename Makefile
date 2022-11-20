@@ -8,4 +8,4 @@ utils.o: utils.cpp utils.h
 	g++-12 -c utils.cpp
 
 clean:
-	rm *.o output *.out
+	rm *.o main
