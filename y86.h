@@ -8,9 +8,6 @@
 #define FLAG_Z 0x40
 #define FLAG_S 0x80
 
-#define MEM_SIZE 1024
-#define NUM_REGISTERS 16
-
 class Y86Sim {
     public:
         y86_state state;

@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#define MEM_SIZE 1024
+#define MEM_SIZE 32
 #define NUM_REGISTERS 16
 #define NUM_INSTR 30
 
@@ -61,10 +61,36 @@ typedef enum _inst_t {
 /* validate instruction, if valid return corresponding enum */
 inst_t inst_to_enum(const char *str);
 
+typedef enum _reg_name_t {
+    R_RAX,
+    R_RCX,
+    R_RDX,
+    R_RBX,
+    R_RSP,
+    R_RBP,
+    R_RSI,
+    R_RDI,
+    R_R8,
+    R_R9,
+    R_R10,
+    R_R11,
+    R_R12,
+    R_R13,
+    R_R14,
+    R_RNONE
+} reg_name_t;
+
 struct inst_map_t {
     const char *inst_str;
     inst_t inst;
 };
 
+struct reg_map_t {
+    const char *reg_str;
+    reg_name_t reg;
+};
+
+extern struct inst_map_t inst_map[NUM_INSTR];
+extern struct reg_map_t reg_map[NUM_REGISTERS];
 
 #endif

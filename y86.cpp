@@ -36,15 +36,27 @@ bool Y86Sim::is_valid_addr(uint64_t address) {
     if (address < this->state.start_addr) return false;
     int start = address - this->state.start_addr; //start index
     int end = start + 7; // end index
-    int lastValidIndex = this->state.start_addr + (this->state.valid_mem - 1);
+    int lastValidIndex = start + this->state.valid_mem - 1;
     if (end >= MEM_SIZE || end > lastValidIndex) {
         return false;
     };
-    return true;
+    return true; 
 }
 
 void Y86Sim::dump_state() {
-    // nice terminal output
+    cout << "PC: " << this->state.pc << "       " << "FLAGS: " << this->state.flags << endl;
+    cout << "\n";
+    for (int i=0; i < NUM_REGISTERS; i++) {
+        cout << reg_map[i].reg_str << ": " << this->state.registers[i] << endl;
+    }
+    cout << "\n";
+    for (int i=0; i < MEM_SIZE / 16; i++) {
+        cout << hex << this->state.start_addr + i << ": ";
+        for (int j=i*16; j < ((i*16) + 16); j++) {
+            cout << this->state.memory[j] << " ";
+        }
+        cout << "\n";
+    }
 }
 
 pair<int, int> Y86Sim::get_addr_indices(uint64_t address) {

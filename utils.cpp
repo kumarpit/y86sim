@@ -34,6 +34,25 @@ struct inst_map_t inst_map[NUM_INSTR] = {
     { "cmovge", I_CMOVGE }
 };
 
+struct reg_map_t reg_map[NUM_REGISTERS] = {
+    {"%rax", R_RAX},
+    {"%rcx", R_RCX},
+    {"%rdx", R_RDX},
+    {"%rbx", R_RBX}, 
+    {"%rsp", R_RSP},
+    {"%rbp", R_RBP},
+    {"%rsi", R_RSI},
+    {"%rdi", R_RDI},
+    {"%r8", R_R8},
+    {"%r9", R_R9},
+    {"%r10", R_R10},
+    {"%r11", R_R11},
+    {"%r12", R_R12},
+    {"%r13", R_R13},
+    {"%r14", R_R14},
+    {"%rnone", R_RNONE},   
+};
+
 inst_t inst_to_enum(const char *str) {
     for (int i = 0; i < NUM_INSTR; i++) {
         if (strcmp(str, inst_map[i].inst_str) == 0) {
