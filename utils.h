@@ -3,13 +3,16 @@
 
 #include <stdint.h>
 
+#define MEM_SIZE 1024
+#define NUM_REGISTERS 16
 #define NUM_INSTR 30
 
+
 typedef struct _y86_state {
-    uint8_t memory[1024];
+    uint8_t memory[MEM_SIZE];    // Y86 is little endian
     uint8_t start_addr;
-    uint8_t valid_mem;
-    uint64_t registers[16];
+    uint8_t valid_mem;       // number of valid bytes
+    uint64_t registers[NUM_REGISTERS];  
     uint64_t pc;
     uint8_t flags;
 } y86_state;
@@ -59,8 +62,8 @@ typedef enum _inst_t {
 inst_t inst_to_enum(const char *str);
 
 struct inst_map_t {
-        const char *inst_str;
-        inst_t inst;
+    const char *inst_str;
+    inst_t inst;
 };
 
 
