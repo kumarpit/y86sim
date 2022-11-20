@@ -1,7 +1,15 @@
 #include <iostream>
-
-using namespace std;
+#include "utils.h"
 
 int main() {
-    cout << "init" << endl;
+    char cmd[128];
+	inst_t token;
+
+	while (1) {
+		printf("Commands : ");
+		if (scanf("%128s", cmd) <= 0)
+			return 0;
+		token = inst_to_enum(cmd);
+		printf("%d\n", (int)token);
+	}
 }
