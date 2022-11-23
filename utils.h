@@ -10,7 +10,7 @@
 
 typedef struct _y86_state {
     uint8_t memory[MEM_SIZE];    // Y86 is little endian
-    uint8_t start_addr;
+    uint64_t start_addr;
     uint8_t valid_mem;       // number of valid bytes
     uint64_t registers[NUM_REGISTERS];  
     uint64_t pc;

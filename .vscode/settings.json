@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "__config": "cpp",
+        "ios": "cpp",
+        "iosfwd": "cpp",
+        "locale": "cpp",
+        "optional": "cpp",
+        "string": "cpp"
+    }
+}

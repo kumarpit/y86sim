@@ -5,10 +5,16 @@ using namespace std;
 
 // this should get a state struct
 Y86Sim::Y86Sim(uint64_t start_addr, uint64_t valid_mem) {
+    for (int i=0; i < MEM_SIZE; i++) {
+        this->state.memory[i] = 0x10;
+    }
     this->state.start_addr = start_addr;
     this->state.valid_mem = valid_mem;
-    this->state.flags = 0;
-    this->state.pc = 0;
+    for (int i=0; i < NUM_REGISTERS; i++) {
+        this->state.registers[i] = 0x20;
+    }
+    this->state.flags = 0xa;
+    this->state.pc = 0x0;
 }
 
 bool Y86Sim::read_quad(uint64_t address, uint64_t &value) {  
@@ -44,16 +50,16 @@ bool Y86Sim::is_valid_addr(uint64_t address) {
 }
 
 void Y86Sim::dump_state() {
-    cout << "PC: " << this->state.pc << "       " << "FLAGS: " << this->state.flags << endl;
+    cout << "PC: " << this->state.pc << "       " << "FLAGS: " << hex << unsigned(this->state.flags) << endl;
     cout << "\n";
     for (int i=0; i < NUM_REGISTERS; i++) {
-        cout << reg_map[i].reg_str << ": " << this->state.registers[i] << endl;
+        cout << reg_map[i].reg_str << ": " << hex << this->state.registers[i] << endl;
     }
     cout << "\n";
     for (int i=0; i < MEM_SIZE / 16; i++) {
-        cout << hex << this->state.start_addr + i << ": ";
+        cout << hex << this->state.start_addr + (i * 16) << ": ";
         for (int j=i*16; j < ((i*16) + 16); j++) {
-            cout << this->state.memory[j] << " ";
+            cout << unsigned(this->state.memory[j]) << " ";
         }
         cout << "\n";
     }
