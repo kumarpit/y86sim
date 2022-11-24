@@ -13,6 +13,6 @@ int main() {
 	// 	token = inst_to_enum(cmd);
 	// 	printf("%d\n", (int)token);
 	// }
-	Y86Sim sim = Y86Sim(0x23ef80, 10);
+	Y86Sim sim = Y86Sim(0xbeef80, 10);
 	sim.dump_state();
 }
