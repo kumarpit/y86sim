@@ -47,13 +47,13 @@ void Y86Sim::dump_state() {
     bool zero = (this->state.flags & FLAG_Z) != 0x0;
     bool sign = (this->state.flags & FLAG_S) != 0x0;
     
-    const char *o = "-";
-    const char *z = "-";
-    const char *s = "-";
+    char o = '-';
+    char z = '-';
+    char s = '-';
 
-    if (overflow) o = "O";
-    if (zero) z = "Z";
-    if (sign) s = "S";
+    if (overflow) o = 'O';
+    if (zero) z = 'Z';
+    if (sign) s = 'S';
 
     cout << "PC: " << this->state.pc << "       " << "FLAGS: " << s << z << o << endl;
     cout << "\n";
