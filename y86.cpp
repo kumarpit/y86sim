@@ -5,16 +5,9 @@ using namespace std;
 
 // this should get a state struct
 Y86Sim::Y86Sim(uint64_t start_addr, uint64_t valid_mem) {
-    for (int i=0; i < MEM_SIZE; i++) {
-        this->state.memory[i] = 0x10;
-    }
     this->state.start_addr = start_addr;
     this->state.valid_mem = valid_mem;
-    for (int i=0; i < NUM_REGISTERS; i++) {
-        this->state.registers[i] = 0x20;
-    }
-    this->state.flags = 0xa;
-    this->state.pc = 0x0;
+    this->state.flags = 0x10;
 }
 
 bool Y86Sim::read_quad(uint64_t address, uint64_t &value) {  
@@ -50,7 +43,19 @@ bool Y86Sim::is_valid_addr(uint64_t address) {
 }
 
 void Y86Sim::dump_state() {
-    cout << "PC: " << this->state.pc << "       " << "FLAGS: " << hex << unsigned(this->state.flags) << endl;
+    bool overflow = (this->state.flags & FLAG_O) != 0x0;
+    bool zero = (this->state.flags & FLAG_Z) != 0x0;
+    bool sign = (this->state.flags & FLAG_S) != 0x0;
+    
+    const char *o = "-";
+    const char *z = "-";
+    const char *s = "-";
+
+    if (overflow) o = "O";
+    if (zero) z = "Z";
+    if (sign) s = "S";
+
+    cout << "PC: " << this->state.pc << "       " << "FLAGS: " << s << z << o << endl;
     cout << "\n";
     for (int i=0; i < NUM_REGISTERS; i++) {
         cout << reg_map[i].reg_str << ": " << hex << this->state.registers[i] << endl;

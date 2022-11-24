@@ -15,6 +15,19 @@ typedef struct _y86_state {
     uint64_t registers[NUM_REGISTERS];  
     uint64_t pc;
     uint8_t flags;
+
+    _y86_state() {
+        for (int i=0; i < MEM_SIZE; i++) {
+            memory[i] = 0x0;
+        };
+        start_addr = 0;
+        valid_mem = 0;
+        for (int i=0; i < NUM_REGISTERS; i++) {
+            registers[i] = 0;
+        }
+        pc = 0;
+        flags = 0;
+    }
 } y86_state;
 
 typedef struct _y86_inst {
